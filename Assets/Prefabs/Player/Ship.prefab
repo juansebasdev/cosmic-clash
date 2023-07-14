@@ -114,5 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 665897e3546e046f5809f5fc18648906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
+  _speed: 10
   _projectilePrefab: {fileID: 0}
+  _xBound: 10.5
+  _yBound: 4.5

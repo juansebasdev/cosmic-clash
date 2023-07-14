@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour, IShooter
 {
     [SerializeField] private float _speed;
     [SerializeField] private GameObject _projectilePrefab;
+    [SerializeField] private float _xBound = 10.5f;
+    [SerializeField] private float _yBound = 4.5f;
     private float _horizontalInput;
     private float _verticalInput;
     private PlayerStates _playerState;
@@ -25,11 +27,27 @@ public class PlayerController : MonoBehaviour, IShooter
 
             transform.Translate(_horizontalInput * _speed * Time.deltaTime, _verticalInput * _speed * Time.deltaTime, 0);
 
+            // Limit the space of movement in both X and Y axis
+            ConstraintMovement();
+
             if (Input.GetButtonDown("Fire1"))
             {
                 Shoot();
             }
         }
+    }
+
+    private void ConstraintMovement()
+    {
+        if (transform.position.y > _yBound)
+            transform.position = new Vector2(transform.position.x, _yBound);
+        if (transform.position.y < -_yBound)
+            transform.position = new Vector2(transform.position.x, -_yBound);
+        if (transform.position.x > _xBound)
+            transform.position = new Vector2(_xBound, transform.position.y);
+        if (transform.position.x < -_xBound)
+            transform.position = new Vector2(-_xBound, transform.position.y);
+
     }
 
     public void Shoot()

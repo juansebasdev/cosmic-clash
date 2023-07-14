@@ -14,4 +14,12 @@ public class PlayerProjectile : MonoBehaviour
         if (Mathf.Abs(transform.position.y) > _yBound)
             gameObject.SetActive(false);
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Damage"))
+        {
+            Destroy(other.gameObject);
+        }
+    }
 }

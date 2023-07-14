@@ -36,6 +36,14 @@ public class PlayerController : MonoBehaviour, IShooter
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Damage") || other.gameObject.CompareTag("EnemyMissile"))
+        {
+            _playerState = PlayerStates.dead;
+        }
+    }
+
     private void ConstraintMovement()
     {
         if (transform.position.y > _yBound)

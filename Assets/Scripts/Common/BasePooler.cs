@@ -16,7 +16,7 @@ public abstract class BasePooler : MonoBehaviour
         {
             GameObject gameObject = Instantiate(_objectPrefab, Vector3.zero, _objectPrefab.transform.rotation);
             gameObject.SetActive(false);
-            gameObject.transform.SetParent(gameObject.transform);
+            gameObject.transform.SetParent(transform);
             _preloadObjects.Add(gameObject);
         }
     }

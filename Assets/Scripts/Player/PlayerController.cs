@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour, IShooter
 {
     [SerializeField] private float _speed;
-    [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private float _xBound = 10.5f;
     [SerializeField] private float _yBound = 4.5f;
     private float _horizontalInput;
@@ -52,7 +51,7 @@ public class PlayerController : MonoBehaviour, IShooter
 
     public void Shoot()
     {
-        GameObject projectile = ProjectilePooler.Instance.GetPreloadObject();
+        GameObject projectile = PlayerProjectilePooler.Instance.GetPreloadObject();
         if (projectile != null)
         {
             projectile.SetActive(true);

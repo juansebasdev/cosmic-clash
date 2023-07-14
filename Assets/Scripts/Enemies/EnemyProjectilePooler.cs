@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectilePooler : BasePooler
+public class EnemyProjectilePooler : BasePooler
 {
-    public static ProjectilePooler Instance { get; private set; }
+    public static EnemyProjectilePooler Instance { get; private set; }
 
     private void Awake()
     {

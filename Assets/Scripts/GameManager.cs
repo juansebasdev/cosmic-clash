@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _enemyXRange;
     [SerializeField] private float _coinXRange = 10.5f;
     private int _playerScore;
+    public GameStates gameState;
 
     private void Awake()
     {
@@ -24,13 +25,19 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        gameState = GameStates.start;
+    }
+
+    public void Play()
+    {
+        gameState = GameStates.play;
         StartCoroutine(InstatiateEnemies());
         StartCoroutine(InstatiateCoins());
     }
 
     private IEnumerator InstatiateEnemies()
     {
-        while (true)
+        while (gameState == GameStates.play)
         {
             yield return new WaitForSeconds(2.5f);
             Vector2 enemyPos = new Vector2(Random.Range(-_enemyXRange, _enemyXRange), 4);

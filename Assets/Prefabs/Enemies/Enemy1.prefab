@@ -124,6 +124,7 @@ MonoBehaviour:
   _xBound: 10
   _yBound: 8
   _canShoot: 0
+  _points: 2
 --- !u!50 &-4270305459210777108
 Rigidbody2D:
   serializedVersion: 4

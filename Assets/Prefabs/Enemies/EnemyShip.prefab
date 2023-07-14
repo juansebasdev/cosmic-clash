@@ -124,6 +124,7 @@ MonoBehaviour:
   _xBound: 10
   _yBound: 8
   _canShoot: 1
+  _points: 8
   _projectileSpeed: 5
 --- !u!50 &2024757185716627199
 Rigidbody2D:

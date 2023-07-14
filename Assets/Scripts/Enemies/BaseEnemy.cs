@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseEnemy : MonoBehaviour, IEnemy, IShooter
+public class BaseEnemy : MonoBehaviour, IEnemy, IShooter, IHasPoints
 {
     [SerializeField] protected LayerMask _whatIsPlayer;
     [SerializeField] protected float _attackRange = 0.2f;
@@ -11,6 +11,7 @@ public class BaseEnemy : MonoBehaviour, IEnemy, IShooter
     [SerializeField] protected float _xBound = 8f;
     [SerializeField] protected float _yBound = 5f;
     [SerializeField] protected bool _canShoot;
+    [SerializeField] protected int _points;
     protected Transform _playerTransform;
     protected float _speed = 20f;
     protected float _moveInX;
@@ -19,6 +20,7 @@ public class BaseEnemy : MonoBehaviour, IEnemy, IShooter
     protected bool _hasAttacked = false;
     protected Vector2 _directionToTarget;
     public bool canShoot { get => _canShoot; protected set => canShoot = _canShoot; }
+    public int points { get => _points; protected set => points = _points; }
 
     public virtual void Shoot() { }
 

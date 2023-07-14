@@ -42,6 +42,11 @@ public class PlayerController : MonoBehaviour, IShooter
         {
             _playerState = PlayerStates.dead;
         }
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            GameManager.Instance.IncreasePlayerScore(other.gameObject.GetComponent<IHasPoints>().points);
+            other.gameObject.SetActive(false);
+        }
     }
 
     private void ConstraintMovement()

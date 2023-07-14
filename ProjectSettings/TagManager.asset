@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Damage
   - EnemyMissile
+  - Coin
   layers:
   - Default
   - TransparentFX

@@ -19,6 +19,7 @@ public class PlayerProjectile : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Damage"))
         {
+            GameManager.Instance.IncreasePlayerScore(other.gameObject.GetComponent<IHasPoints>().points);
             Destroy(other.gameObject);
         }
     }

@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     [SerializeField] private float _enemyXRange;
+    [SerializeField] private float _coinXRange = 10.5f;
+    private int _playerScore;
 
     private void Awake()
     {
@@ -23,6 +25,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(InstatiateEnemies());
+        StartCoroutine(InstatiateCoins());
     }
 
     private IEnumerator InstatiateEnemies()
@@ -33,5 +36,25 @@ public class GameManager : MonoBehaviour
             Vector2 enemyPos = new Vector2(Random.Range(-_enemyXRange, _enemyXRange), 4);
             EnemySpawner.Instance.SpawnEnemies(enemyPos);
         }
+    }
+
+    private IEnumerator InstatiateCoins()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            GameObject coin = CoinPooler.Instance.GetPreloadObject();
+            if (coin != null)
+            {
+                coin.SetActive(true);
+                coin.transform.position = new Vector2(Random.Range(-_coinXRange, _coinXRange), 5);
+            }
+        }
+    }
+
+    public void IncreasePlayerScore(int points)
+    {
+        _playerScore += points;
+        UIManager.Instance.UpdateScoreText(_playerScore);
     }
 }

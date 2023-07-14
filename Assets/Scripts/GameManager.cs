@@ -30,15 +30,8 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(2.5f);
-            for (int i = 0; i < 4; ++i)
-            {
-                GameObject enemy = EnemyPooler.Instance.GetPreloadObject();
-                if (enemy != null)
-                {
-                    enemy.SetActive(true);
-                    enemy.transform.position = new Vector2(Random.Range(-_enemyXRange, _enemyXRange), 4);
-                }
-            }
+            Vector2 enemyPos = new Vector2(Random.Range(-_enemyXRange, _enemyXRange), 4);
+            EnemySpawner.Instance.SpawnEnemies(enemyPos);
         }
     }
 }

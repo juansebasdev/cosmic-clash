@@ -41,14 +41,13 @@ public class BaseEnemy : MonoBehaviour, IEnemy, IShooter
 
     private void Update()
     {
-
         if (_playerInAttackRange && !_hasAttacked)
             Attack();
         else
             Move();
 
         if (Mathf.Abs(transform.position.y) > _yBound || Mathf.Abs(transform.position.x) > _xBound)
-            gameObject.SetActive(false);
+            Destroy(gameObject);
     }
 
     public virtual void Move()

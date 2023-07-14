@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 1139766986}
   - component: {fileID: 1139766987}
   m_Layer: 0
-  m_Name: EnemyPooler
+  m_Name: EnemySpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -359,7 +359,7 @@ MonoBehaviour:
   - {fileID: 2015921148519454522, guid: 6d47fdc98dbd34618a880b2f1de07994, type: 3}
   - {fileID: 791217583267720215, guid: a96d8d1bc9e14435a9e12c5952f7d121, type: 3}
   - {fileID: 6243031194838143400, guid: 2c18fc4a38a274843a7962b7a708b69f, type: 3}
-  _numOfEnemies: 10
+  _numOfEnemies: 3
 --- !u!1 &1149880654
 GameObject:
   m_ObjectHideFlags: 0

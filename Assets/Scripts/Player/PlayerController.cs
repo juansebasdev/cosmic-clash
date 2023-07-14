@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IShooter
 {
     [SerializeField] private float _speed;
+    [SerializeField] private GameObject _projectilePrefab;
     private float _horizontalInput;
     private float _verticalInput;
     private PlayerStates _playerState;
+    private bool _isLeft = true;
 
     private void Start()
     {
@@ -22,6 +24,26 @@ public class PlayerController : MonoBehaviour
             _verticalInput = Input.GetAxis("Vertical");
 
             transform.Translate(_horizontalInput * _speed * Time.deltaTime, _verticalInput * _speed * Time.deltaTime, 0);
+
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Shoot();
+            }
+        }
+    }
+
+    public void Shoot()
+    {
+        GameObject projectile = ProjectilePooler.Instance.GetPreloadObject();
+        if (projectile != null)
+        {
+            projectile.SetActive(true);
+            if (_isLeft)
+                projectile.transform.position = transform.position + Vector3.left * 0.6f;
+            else
+                projectile.transform.position = transform.position + Vector3.right * 0.6f;
+
+            _isLeft = !_isLeft;
         }
     }
 }

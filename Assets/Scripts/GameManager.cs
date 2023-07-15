@@ -56,12 +56,16 @@ public class GameManager : MonoBehaviour
     public void Play()
     {
         gameState = GameStates.play;
-        _playerScore = 0;
-        UIManager.Instance.UpdateScoreText(_playerScore);
-        playerObject.SetActive(true);
-        playerObject.GetComponent<PlayerController>().playerState = PlayerStates.alive;
-        playerObject.transform.position = new Vector2(0, -3.5f);
-        AudioManager.Instance.PlayGameplayMusic();
+
+        if (!playerObject.activeInHierarchy)
+        {
+            _playerScore = 0;
+            UIManager.Instance.UpdateScoreText(_playerScore);
+            playerObject.SetActive(true);
+            playerObject.GetComponent<PlayerController>().playerState = PlayerStates.alive;
+            playerObject.transform.position = new Vector2(0, -3.5f);
+            AudioManager.Instance.PlayGameplayMusic();
+        }
         UIManager.Instance.Gameplay();
         StartCoroutine(InstatiateEnemies());
         StartCoroutine(InstatiateCoins());

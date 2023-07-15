@@ -9,10 +9,13 @@ public class PlayerProjectile : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(Vector2.up * _speed * Time.deltaTime);
+        if (GameManager.Instance.gameState == GameStates.play)
+        {
+            transform.Translate(Vector2.up * _speed * Time.deltaTime);
 
-        if (Mathf.Abs(transform.position.y) > _yBound)
-            gameObject.SetActive(false);
+            if (Mathf.Abs(transform.position.y) > _yBound)
+                gameObject.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

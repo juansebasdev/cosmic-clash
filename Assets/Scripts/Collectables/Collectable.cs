@@ -12,9 +12,12 @@ public class Collectable : MonoBehaviour, IHasPoints
 
     private void Update()
     {
-        transform.Translate(Vector2.down * _speed * Time.deltaTime);
+        if (GameManager.Instance.gameState == GameStates.play)
+        {
+            transform.Translate(Vector2.down * _speed * Time.deltaTime);
 
-        if (Mathf.Abs(transform.position.y) > _yBound)
-            gameObject.SetActive(false);
+            if (Mathf.Abs(transform.position.y) > _yBound)
+                gameObject.SetActive(false);
+        }
     }
 }

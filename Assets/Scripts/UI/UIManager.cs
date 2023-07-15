@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
     [SerializeField] private TMP_Text _scoreText;
+    [SerializeField] private List<GameObject> _uiPanels;
 
     private void Awake()
     {
@@ -19,6 +20,38 @@ public class UIManager : MonoBehaviour
             Instance = this;
         }
     }
+
+    private void Start()
+    {
+        MainMenu();
+    }
+
+    public void MainMenu()
+    {
+        BlockPanel("MenuPanel");
+    }
+
+    public void Gameplay()
+    {
+        BlockPanel("GameplayPanel");
+    }
+
+    public void Pause()
+    {
+        BlockPanel("PausePanel");
+    }
+
+    private void BlockPanel(string panelName)
+    {
+        foreach (GameObject panel in _uiPanels)
+        {
+            if (panel.name == panelName)
+                panel.SetActive(true);
+            else
+                panel.SetActive(false);
+        }
+    }
+
     public void UpdateScoreText(int value)
     {
         _scoreText.text = string.Format("{0:0000}", value);

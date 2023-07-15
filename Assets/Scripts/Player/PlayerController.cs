@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour, IShooter
 
     private void Update()
     {
-        if (_playerState == PlayerStates.alive)
+        if (GameManager.Instance.gameState == GameStates.play && _playerState == PlayerStates.alive)
         {
             _horizontalInput = Input.GetAxis("Horizontal");
             _verticalInput = Input.GetAxis("Vertical");
@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour, IShooter
         if (other.gameObject.CompareTag("Damage") || other.gameObject.CompareTag("EnemyMissile"))
         {
             _playerState = PlayerStates.dead;
+            GameManager.Instance.gameState = GameStates.finish;
         }
         if (other.gameObject.CompareTag("Coin"))
         {

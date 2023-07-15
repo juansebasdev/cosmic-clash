@@ -20,18 +20,21 @@ public class EnemyProjectile : MonoBehaviour
 
     private void Update()
     {
-        if (!_hasFired)
+        if (GameManager.Instance.gameState == GameStates.play)
         {
-            _directionToTarget = _playerTransform.position - transform.position;
-            _hasFired = true;
+            if (!_hasFired)
+            {
+                _directionToTarget = _playerTransform.position - transform.position;
+                _hasFired = true;
+            }
+
+            _directionToTarget.Normalize();
+            _moveInX = _directionToTarget.x * _speed * Time.deltaTime;
+            _moveInY = _directionToTarget.y * _speed / 2 * Time.deltaTime;
+            transform.Translate(_moveInX, _moveInY, 0);
+
+            if (Mathf.Abs(transform.position.y) > _yBound)
+                gameObject.SetActive(false);
         }
-
-        _directionToTarget.Normalize();
-        _moveInX = _directionToTarget.x * _speed * Time.deltaTime;
-        _moveInY = _directionToTarget.y * _speed / 2 * Time.deltaTime;
-        transform.Translate(_moveInX, _moveInY, 0);
-
-        if (Mathf.Abs(transform.position.y) > _yBound)
-            gameObject.SetActive(false);
     }
 }

@@ -43,13 +43,16 @@ public class BaseEnemy : MonoBehaviour, IEnemy, IShooter, IHasPoints
 
     private void Update()
     {
-        if (_playerInAttackRange && !_hasAttacked)
-            Attack();
-        else
-            Move();
+        if (GameManager.Instance.gameState == GameStates.play)
+        {
+            if (_playerInAttackRange && !_hasAttacked)
+                Attack();
+            else
+                Move();
 
-        if (Mathf.Abs(transform.position.y) > _yBound || Mathf.Abs(transform.position.x) > _xBound)
-            Destroy(gameObject);
+            if (Mathf.Abs(transform.position.y) > _yBound || Mathf.Abs(transform.position.x) > _xBound)
+                Destroy(gameObject);
+        }
     }
 
     public virtual void Move()

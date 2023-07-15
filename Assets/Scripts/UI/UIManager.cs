@@ -41,6 +41,11 @@ public class UIManager : MonoBehaviour
         BlockPanel("PausePanel");
     }
 
+    public void Finish()
+    {
+        BlockPanel("LosePanel");
+    }
+
     private void BlockPanel(string panelName)
     {
         foreach (GameObject panel in _uiPanels)

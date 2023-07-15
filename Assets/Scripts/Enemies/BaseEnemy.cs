@@ -26,7 +26,7 @@ public class BaseEnemy : MonoBehaviour, IEnemy, IShooter, IHasPoints
 
     private void Start()
     {
-        _playerTransform = GameObject.Find("Player").GetComponent<Transform>();
+        _playerTransform = GameManager.Instance.playerObject.GetComponent<Transform>();
         _speed = Random.Range(_minSpeed, _maxSpeed);
         _directionToTarget = _playerTransform.position - transform.position;
 

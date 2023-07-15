@@ -9,17 +9,17 @@ public class PlayerController : MonoBehaviour, IShooter
     [SerializeField] private float _yBound = 4.5f;
     private float _horizontalInput;
     private float _verticalInput;
-    private PlayerStates _playerState;
+    [HideInInspector] public PlayerStates playerState;
     private bool _isLeft = true;
 
     private void Start()
     {
-        _playerState = PlayerStates.alive;
+        playerState = PlayerStates.alive;
     }
 
     private void Update()
     {
-        if (GameManager.Instance.gameState == GameStates.play && _playerState == PlayerStates.alive)
+        if (GameManager.Instance.gameState == GameStates.play && playerState == PlayerStates.alive)
         {
             _horizontalInput = Input.GetAxis("Horizontal");
             _verticalInput = Input.GetAxis("Vertical");
@@ -40,8 +40,8 @@ public class PlayerController : MonoBehaviour, IShooter
     {
         if (other.gameObject.CompareTag("Damage") || other.gameObject.CompareTag("EnemyMissile"))
         {
-            _playerState = PlayerStates.dead;
-            GameManager.Instance.gameState = GameStates.finish;
+            playerState = PlayerStates.dead;
+            GameManager.Instance.Finish();
         }
         if (other.gameObject.CompareTag("Coin"))
         {

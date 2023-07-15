@@ -9,6 +9,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private float _enemyXRange;
     [SerializeField] private float _coinXRange = 10.5f;
+    [SerializeField] private GameObject _playerPrefab;
+    [SerializeField] private List<GameObject> _poolsToClean;
+    [SerializeField] private List<GameObject> _spawnersToClean;
+    [HideInInspector] public GameObject playerObject;
     private int _playerScore;
     private bool _hasPause;
     public GameStates gameState;
@@ -29,6 +33,8 @@ public class GameManager : MonoBehaviour
     {
         gameState = GameStates.start;
         UIManager.Instance.MainMenu();
+        playerObject = Instantiate(_playerPrefab, new Vector2(0, -3.5f), _playerPrefab.transform.rotation);
+        playerObject.SetActive(false);
     }
 
     private void Update()
@@ -43,6 +49,11 @@ public class GameManager : MonoBehaviour
     public void Play()
     {
         gameState = GameStates.play;
+        _playerScore = 0;
+        UIManager.Instance.UpdateScoreText(_playerScore);
+        playerObject.SetActive(true);
+        playerObject.GetComponent<PlayerController>().playerState = PlayerStates.alive;
+        playerObject.transform.position = new Vector2(0, -3.5f);
         UIManager.Instance.Gameplay();
         StartCoroutine(InstatiateEnemies());
         StartCoroutine(InstatiateCoins());
@@ -62,6 +73,19 @@ public class GameManager : MonoBehaviour
             gameState = GameStates.play;
             Play();
         }
+    }
+
+    public void PlayAgain()
+    {
+        CleanObjects();
+        Play();
+    }
+
+    public void Finish()
+    {
+        gameState = GameStates.finish;
+        UIManager.Instance.Finish();
+        playerObject.SetActive(false);
     }
 
     public void Exit()
@@ -89,6 +113,29 @@ public class GameManager : MonoBehaviour
             {
                 coin.SetActive(true);
                 coin.transform.position = new Vector2(Random.Range(-_coinXRange, _coinXRange), 5);
+            }
+        }
+    }
+
+    private void CleanObjects()
+    {
+        foreach (GameObject poolObject in _poolsToClean)
+        {
+            Transform[] childrenInPoolObject = poolObject.GetComponentsInChildren<Transform>();
+            foreach (Transform child in childrenInPoolObject)
+            {
+                if (child.gameObject.layer == 6)
+                    child.gameObject.SetActive(false);
+            }
+        }
+
+        foreach (GameObject spawnObject in _spawnersToClean)
+        {
+            Transform[] childrenInSpawnObject = spawnObject.GetComponentsInChildren<Transform>();
+            foreach (Transform child in childrenInSpawnObject)
+            {
+                if (child.tag == "Damage")
+                    Destroy(child.gameObject);
             }
         }
     }

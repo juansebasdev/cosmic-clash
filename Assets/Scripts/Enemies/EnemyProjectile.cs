@@ -14,7 +14,7 @@ public class EnemyProjectile : MonoBehaviour
 
     private void Start()
     {
-        _playerTransform = GameObject.Find("Player").GetComponent<Transform>();
+        _playerTransform = GameManager.Instance.playerObject.GetComponent<Transform>();
         _hasFired = false;
     }
 

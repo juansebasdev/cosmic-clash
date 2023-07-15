@@ -40,11 +40,13 @@ public class PlayerController : MonoBehaviour, IShooter
     {
         if (other.gameObject.CompareTag("Damage") || other.gameObject.CompareTag("EnemyMissile"))
         {
+            SFXManager.Instance.PlayLose();
             playerState = PlayerStates.dead;
             GameManager.Instance.Finish();
         }
         if (other.gameObject.CompareTag("Coin"))
         {
+            SFXManager.Instance.PlayCollect();
             GameManager.Instance.IncreasePlayerScore(other.gameObject.GetComponent<IHasPoints>().points);
             other.gameObject.SetActive(false);
         }
@@ -68,6 +70,7 @@ public class PlayerController : MonoBehaviour, IShooter
         GameObject projectile = PlayerProjectilePooler.Instance.GetPreloadObject();
         if (projectile != null)
         {
+            SFXManager.Instance.PlayShoot();
             projectile.SetActive(true);
             if (_isLeft)
                 projectile.transform.position = transform.position + Vector3.left * 0.6f;

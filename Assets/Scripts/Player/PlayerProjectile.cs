@@ -22,6 +22,7 @@ public class PlayerProjectile : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Damage"))
         {
+            SFXManager.Instance.PlayHit();
             GameManager.Instance.IncreasePlayerScore(other.gameObject.GetComponent<IHasPoints>().points);
             Destroy(other.gameObject);
         }

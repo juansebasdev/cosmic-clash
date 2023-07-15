@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _points: 5
-  _speed: 5
+  _speed: 8
   _yBound: 10
 --- !u!50 &-1595442614012434224
 Rigidbody2D:

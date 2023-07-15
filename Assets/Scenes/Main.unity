@@ -1911,6 +1911,10 @@ MonoBehaviour:
   _audioSource: {fileID: 898697346}
   _soundButton: {fileID: 707429849}
   _uiClick: {fileID: 8300000, guid: eb77a6dc838a34315bebb6bc7893cb69, type: 3}
+  _collect: {fileID: 8300000, guid: 5ab8fc664ca4d604f820e255005a664a, type: 3}
+  _shoot: {fileID: 8300000, guid: fd25a15f9797641458336cccfb445343, type: 3}
+  _hit: {fileID: 8300000, guid: 566d2ea6240b489479a6e9fd608c2621, type: 3}
+  _lose: {fileID: 8300000, guid: 21c4a490b24ba2045bc815f7626a40ef, type: 3}
 --- !u!4 &898697345
 Transform:
   m_ObjectHideFlags: 0
@@ -4255,7 +4259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyXRange: 8
-  _coinXRange: 10.5
+  _coinXRange: 8
   _playerPrefab: {fileID: 7925422379402367488, guid: 28ac4f9247a4d4cb8b309a80c3639ec0, type: 3}
   _backgroundPrefab: {fileID: 4103299098226286525, guid: 80937a4f4c7ee4b9d97a73d443ea62e9, type: 3}
   _poolsToClean:

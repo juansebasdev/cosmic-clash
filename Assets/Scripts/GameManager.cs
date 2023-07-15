@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,7 +11,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _playerPrefab;
     [SerializeField] private List<GameObject> _poolsToClean;
     [SerializeField] private List<GameObject> _spawnersToClean;
+    [SerializeField] private List<SoundManager> _soundManagers;
+    [SerializeField] private List<SoundSlider> _soundSliders;
+    [SerializeField] private GameObject _soundButton;
     [HideInInspector] public GameObject playerObject;
+    [HideInInspector] public bool hasSound { get; private set; } = true;
     private int _playerScore;
     private bool _hasPause;
     public GameStates gameState;
@@ -41,8 +44,12 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Pause"))
         {
-            if (gameState != GameStates.start)
+            if (gameState != GameStates.start && gameState != GameStates.finish)
                 Pause();
+        }
+        if (Input.GetButtonDown("Sound"))
+        {
+            Sound();
         }
     }
 
@@ -54,6 +61,7 @@ public class GameManager : MonoBehaviour
         playerObject.SetActive(true);
         playerObject.GetComponent<PlayerController>().playerState = PlayerStates.alive;
         playerObject.transform.position = new Vector2(0, -3.5f);
+        AudioManager.Instance.PlayGameplayMusic();
         UIManager.Instance.Gameplay();
         StartCoroutine(InstatiateEnemies());
         StartCoroutine(InstatiateCoins());
@@ -75,6 +83,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void Sound()
+    {
+        hasSound = !hasSound;
+        foreach (SoundManager soundManager in _soundManagers)
+        {
+            soundManager.Sound();
+        }
+        foreach (SoundSlider soundSlider in _soundSliders)
+        {
+            soundSlider.SetVolumeOnSlider();
+        }
+        SoundBtn soundBtn = _soundButton.GetComponent<SoundBtn>();
+        if (soundBtn != null)
+            soundBtn.ChangeSound();
+    }
+
     public void PlayAgain()
     {
         CleanObjects();
@@ -90,7 +114,9 @@ public class GameManager : MonoBehaviour
 
     public void Exit()
     {
-        SceneManager.LoadScene(0);
+        Finish();
+        CleanObjects();
+        Start();
     }
 
     private IEnumerator InstatiateEnemies()
@@ -137,6 +163,10 @@ public class GameManager : MonoBehaviour
                 if (child.tag == "Damage")
                     Destroy(child.gameObject);
             }
+        }
+        foreach (SoundSlider soundSlider in _soundSliders)
+        {
+            soundSlider.SetVolumeOnSlider();
         }
     }
 

@@ -29,6 +29,22 @@ public class UIManager : MonoBehaviour
     public void MainMenu()
     {
         BlockPanel("MenuPanel");
+        AudioManager.Instance.PlayMenuMusic();
+    }
+
+    public void Options()
+    {
+        BlockPanel("OptionsPanel");
+    }
+    public void Instructions()
+    {
+        BlockPanel("InstructionsPanel");
+    }
+
+    public void Credits()
+    {
+        BlockPanel("CreditsPanel");
+        AudioManager.Instance.PlayCreditsMusic();
     }
 
     public void Gameplay()

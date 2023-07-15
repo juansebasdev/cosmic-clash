@@ -10,6 +10,7 @@ public class SFXManager : SoundManager
     [SerializeField] AudioClip _shoot;
     [SerializeField] AudioClip _hit;
     [SerializeField] AudioClip _lose;
+    [SerializeField] AudioClip _gameOver;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -53,6 +54,11 @@ public class SFXManager : SoundManager
     public void PlayHit()
     {
         PlayClip(_hit);
+    }
+    
+    public void PlayGameOver()
+    {
+        PlayClip(_gameOver);
     }
 
     private void PlayClip(AudioClip audioClip)

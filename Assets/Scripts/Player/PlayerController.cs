@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour, IShooter
         {
             SFXManager.Instance.PlayLose();
             playerState = PlayerStates.dead;
+            SFXManager.Instance.PlayGameOver();
             GameManager.Instance.Finish();
         }
         if (other.gameObject.CompareTag("Coin"))

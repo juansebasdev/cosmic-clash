@@ -9,12 +9,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _enemyXRange;
     [SerializeField] private float _coinXRange = 10.5f;
     [SerializeField] private GameObject _playerPrefab;
+    [SerializeField] private GameObject _backgroundPrefab;
     [SerializeField] private List<GameObject> _poolsToClean;
     [SerializeField] private List<GameObject> _spawnersToClean;
     [SerializeField] private List<SoundManager> _soundManagers;
     [SerializeField] private List<SoundSlider> _soundSliders;
     [SerializeField] private GameObject _soundButton;
     [HideInInspector] public GameObject playerObject;
+    [HideInInspector] public GameObject backgroundObject;
     [HideInInspector] public bool hasSound { get; private set; } = true;
     private int _playerScore;
     private bool _hasPause;
@@ -38,6 +40,8 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.MainMenu();
         playerObject = Instantiate(_playerPrefab, new Vector2(0, -3.5f), _playerPrefab.transform.rotation);
         playerObject.SetActive(false);
+        backgroundObject = Instantiate(_backgroundPrefab, new Vector3(0, 0, 5f), _backgroundPrefab.transform.rotation);
+        backgroundObject.SetActive(false);
     }
 
     private void Update()
@@ -64,6 +68,10 @@ public class GameManager : MonoBehaviour
             playerObject.SetActive(true);
             playerObject.GetComponent<PlayerController>().playerState = PlayerStates.alive;
             playerObject.transform.position = new Vector2(0, -3.5f);
+
+            backgroundObject.SetActive(true);
+            backgroundObject.transform.position = new Vector3(0, 0, 5f);
+
             AudioManager.Instance.PlayGameplayMusic();
         }
         UIManager.Instance.Gameplay();

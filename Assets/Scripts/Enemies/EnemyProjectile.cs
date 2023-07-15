@@ -4,34 +4,25 @@ using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
 {
-    [SerializeField] private float _speed;
     [SerializeField] private float _yBound = 10f;
     private Transform _playerTransform;
-    private float _moveInX;
-    private float _moveInY;
+    private float angle;
     private Vector2 _directionToTarget;
-    private bool _hasFired;
+    private Quaternion _rotation;
 
     private void Start()
     {
         _playerTransform = GameManager.Instance.playerObject.GetComponent<Transform>();
-        _hasFired = false;
     }
 
     private void Update()
     {
         if (GameManager.Instance.gameState == GameStates.play)
         {
-            if (!_hasFired)
-            {
-                _directionToTarget = _playerTransform.position - transform.position;
-                _hasFired = true;
-            }
-
-            _directionToTarget.Normalize();
-            _moveInX = _directionToTarget.x * _speed * Time.deltaTime;
-            _moveInY = _directionToTarget.y * _speed / 2 * Time.deltaTime;
-            transform.Translate(_moveInX, _moveInY, 0);
+            _directionToTarget = (_playerTransform.position - transform.position);
+            angle = Mathf.Atan2(_directionToTarget.y, _directionToTarget.x) * Mathf.Rad2Deg;
+            _rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            transform.rotation = _rotation;
 
             if (Mathf.Abs(transform.position.y) > _yBound)
                 gameObject.SetActive(false);

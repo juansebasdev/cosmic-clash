@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6211545030094673157}
   - component: {fileID: 8475943982539404999}
   - component: {fileID: -5648609163655735733}
+  - component: {fileID: -8254226849543323855}
   m_Layer: 6
   m_Name: EnemyMissile
   m_TagString: EnemyMissile
@@ -138,3 +139,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-8254226849543323855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6211545030094673156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4cb4cb4d2da3464aa9c78d14f6e6948, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 8

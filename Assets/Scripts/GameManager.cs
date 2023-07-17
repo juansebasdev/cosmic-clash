@@ -38,9 +38,11 @@ public class GameManager : MonoBehaviour
     {
         gameState = GameStates.start;
         UIManager.Instance.MainMenu();
-        playerObject = Instantiate(_playerPrefab, new Vector2(0, -3.5f), _playerPrefab.transform.rotation);
+        if(playerObject == null)
+            playerObject = Instantiate(_playerPrefab, new Vector2(0, -3.5f), _playerPrefab.transform.rotation);
         playerObject.SetActive(false);
-        backgroundObject = Instantiate(_backgroundPrefab, new Vector3(0, 0, 5f), _backgroundPrefab.transform.rotation);
+        if(backgroundObject == null)
+            backgroundObject = Instantiate(_backgroundPrefab, new Vector3(0, 0, 5f), _backgroundPrefab.transform.rotation);
         backgroundObject.SetActive(false);
     }
 

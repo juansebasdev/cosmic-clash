@@ -43,7 +43,7 @@ public class Credits : MonoBehaviour
         using (UnityWebRequest request = UnityWebRequest.Get(path))
         {
             yield return request.SendWebRequest();
-            if (request.isHttpError || request.isNetworkError)
+            if (request.result == UnityWebRequest.Result.ProtocolError || request.result == UnityWebRequest.Result.ConnectionError)
             {
                 Debug.Log(request.error);
             }
